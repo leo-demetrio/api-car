@@ -29,9 +29,41 @@ module.exports = {
     },
     replace: async (req, res)=> {
         let json = { error:'', result: {}};
+        let code = req.params.code;
         let body = req.body;
-        let car = await CarService.replace(body);  
-        if(car) json.result = car; 
-        res.json(body);
+        if(!(code && body.model && body.board)){
+            json.error = 'Could not complete action';
+            res.json(json);
+            return;
+        }
+        let cars = await CarService.findOne(code);  
+        if(!cars){
+            json.error = 'Could not complete action find';
+            res.json(json);
+            return;
+        }      
+        
+        await CarService.replace(code,body); 
+        json.result = {
+            code, model: body.model, board: body.board
+        }
+        res.json(json);
+    },
+    delete: async (req, res)=> {
+        let json = { error:'', result: {}};
+        let code = req.params.code;
+        if(!(code)){
+            json.error = 'Could not complete action';
+            res.json(json);
+            return;
+        }
+        let cars = await CarService.findOne(code);  
+        if(!cars){
+            json.error = 'Could not complete action find';
+            res.json(json);
+            return;
+        }   
+        await CarService.delete(code);
+        res.json(json);
     }
 }
