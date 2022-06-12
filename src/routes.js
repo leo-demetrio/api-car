@@ -1,4 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exprts = router;
+const CarController = require('./controllers/CarController');
+router.get('/cars', CarController.findAll);
+
+module.exports = router;
