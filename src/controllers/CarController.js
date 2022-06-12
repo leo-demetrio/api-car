@@ -19,5 +19,19 @@ module.exports = {
         let cars = await CarService.findOne(code);  
         if(cars) json.result = cars; 
         res.json(json);
+    },
+    insert: async (req, res)=> {
+        let json = { error:'', result: {}};
+        let body = req.body;
+        let car = await CarService.insert(body);  
+        if(car) json.result = car; 
+        res.json(body);
+    },
+    replace: async (req, res)=> {
+        let json = { error:'', result: {}};
+        let body = req.body;
+        let car = await CarService.replace(body);  
+        if(car) json.result = car; 
+        res.json(body);
     }
 }

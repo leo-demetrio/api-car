@@ -17,5 +17,16 @@ module.exports = {
                 acept(result[0]);
             });
         });
+    },
+    insert: (body) => {
+        return new Promise((acept, rej) => {
+            
+            db.query("INSERT INTO tb_cars (model,board) VALUES (?,?)", 
+            [body.model,body.board], 
+            (error, result)=> {
+                if(error) {rej(error);return;}
+                acept(result.code);
+            });
+        });
     }
 };
