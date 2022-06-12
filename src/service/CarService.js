@@ -18,6 +18,16 @@ module.exports = {
             });
         });
     },
+    insert: (body) => {
+        return new Promise((acept, rej) => {
+            db.query("INSERT INTO tb_cars (model,board) VALUES (?,?)", 
+            [body.model,body.board], 
+            (error, result)=> {
+                if(error) {rej(error);return;}
+                acept(result.code);
+            });
+        });
+    },
     replace: (code,body) => {
         return new Promise((acept, rej) => {
             db.query("UPDATE tb_cars SET model = ? ,board = ? WHERE code= ?", 
