@@ -6,6 +6,7 @@ router.get('/cars', CarController.findAll);
 router.get('/cars/:code', CarController.findOne);
 router.post('/cars', CarController.insert);
 router.put('/cars/:code', CarController.replace);
+router.delete('/cars/:code', CarController.delete);
 
 
 module.exports = router;

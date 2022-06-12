@@ -18,14 +18,23 @@ module.exports = {
             });
         });
     },
-    insert: (body) => {
+    replace: (code,body) => {
         return new Promise((acept, rej) => {
-            
-            db.query("INSERT INTO tb_cars (model,board) VALUES (?,?)", 
-            [body.model,body.board], 
+            db.query("UPDATE tb_cars SET model = ? ,board = ? WHERE code= ?", 
+            [body.model,body.board,code], 
             (error, result)=> {
                 if(error) {rej(error);return;}
-                acept(result.code);
+                acept(result);
+            });
+        });
+    },
+    delete: (code) => {
+        return new Promise((acept, rej) => {
+            db.query("DELETE FROM tb_cars WHERE code= ?", 
+            [code], 
+            (error, result)=> {
+                if(error) {rej(error);return;}
+                acept(result);
             });
         });
     }
