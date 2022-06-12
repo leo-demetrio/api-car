@@ -1,0 +1,80 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API CRUD CAR",
+        "description": "Demonstration CRUD",
+        "termsOfService": "http://localhost:3000",
+        "contact": {
+            "email": "leopoldocd@hotmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api",
+            "description": "Entri point"
+        }
+    ],
+    "paths": {
+        "/cars": {
+            "post": {
+                "summary": "Register car",
+                "description": "Insert car in database",
+                "tags": ["Cars"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Car"
+                            },
+                            "required": true,
+                            "examples": {
+                                "car": {
+                                    "value": {
+                                        "model": "Tyota",
+                                        "board": "ANM2022"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "model": {
+                                            "type": "string"
+                                        },
+                                        "board": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Car": {
+                "type": "object",
+                "properties": {
+                    "model": {
+                        "type": "string"
+                    },
+                    "board": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
