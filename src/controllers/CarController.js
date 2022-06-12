@@ -12,5 +12,12 @@ module.exports = {
             })
         }
         res.json(json);
+    },
+    findOne: async (req, res)=> {
+        let json = { error:'', result: {}};
+        let code = req.params.code;
+        let cars = await CarService.findOne(code);  
+        if(cars) json.result = cars; 
+        res.json(json);
     }
 }
